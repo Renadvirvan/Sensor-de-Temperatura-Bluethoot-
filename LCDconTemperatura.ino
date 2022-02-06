@@ -5,7 +5,7 @@
 #include <LiquidCrystal.h>
 
 // Pin donde está conectado DQ
-const byte pinDatosDQ = 15;
+const byte pinDatosDQ = 12;
 //Configuramos pines para transmitir informacion y controlar la LCD
 LiquidCrystal lcd(7,6,5,4,3,2);
 
@@ -18,6 +18,7 @@ void setup() {
   lcd.begin(16, 2);  //Tamaño de la LCD (está en orden (x, y))
   // Iniciamos el bus OneWire
   sensorDS18B20.begin();
+  Serial.begin(9600);
 
 }
 
@@ -36,4 +37,7 @@ void loop() {
   lcd.print(" C");
   //delay(500);
   //lcd.clear();
+  Serial.print("Temperatura: \n");
+  Serial.print(sensorDS18B20.getTempCByIndex(0));
+  Serial.print(" C");
 }
